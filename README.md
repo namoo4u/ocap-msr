@@ -47,8 +47,11 @@ nbdist/
 .nb-gradle/
 ``` 
 
-## Open a project from STS
-1. Import
-1. Maven
-1. Existing Maven projects
+## Packaging and Run the spring-boot application
+```
+$ cd msr-api
+$ mvn package
+$ mvn spring-boot:run
+```
+
 
