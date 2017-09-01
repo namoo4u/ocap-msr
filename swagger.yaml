@@ -272,12 +272,12 @@ definitions:
     type: object
     allOf:
       - $ref: '#/definitions/NewSeat'
-    required:
-      - id
-    properties:
-      id:
-        type: integer
-        format: int64
+      - required:
+        - id
+        properties:
+          id:
+            type: integer
+            format: int64
   NewSeat:
     type: object
     required:
@@ -302,12 +302,12 @@ definitions:
     type: object
     allOf: 
       - $ref: '#/definitions/NewReservation'
-    required:
-      - id
-    properties:
-      id:
-        type: integer
-        format: int64  
+      - required:
+        - id
+        properties:
+          id:
+            type: integer
+            format: int64  
   NewReservation:
     type: object
     required:
