@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 /**
  * UserVO
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-01T17:30:26.562+09:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-01T17:35:54.016+09:00")
 
 public class UserVO   {
   @JsonProperty("id")
@@ -19,6 +19,9 @@ public class UserVO   {
 
   @JsonProperty("email")
   private String email = null;
+
+  @JsonProperty("password")
+  private String password = null;
 
   public UserVO id(Long id) {
     this.id = id;
@@ -62,6 +65,26 @@ public class UserVO   {
     this.email = email;
   }
 
+  public UserVO password(String password) {
+    this.password = password;
+    return this;
+  }
+
+   /**
+   * Get password
+   * @return password
+  **/
+  @ApiModelProperty(value = "")
+
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -73,12 +96,13 @@ public class UserVO   {
     }
     UserVO user = (UserVO) o;
     return Objects.equals(this.id, user.id) &&
-        Objects.equals(this.email, user.email);
+        Objects.equals(this.email, user.email) &&
+        Objects.equals(this.password, user.password);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, email);
+    return Objects.hash(id, email, password);
   }
 
   @Override
@@ -88,6 +112,7 @@ public class UserVO   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    password: ").append(toIndentedString(password)).append("\n");
     sb.append("}");
     return sb.toString();
   }
