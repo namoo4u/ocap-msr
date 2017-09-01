@@ -47,4 +47,8 @@ nbdist/
 .nb-gradle/
 ``` 
 
+## Open a project from STS
+1. Import
+1. Maven
+1. Existing Maven projects
 
