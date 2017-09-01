@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
 /**
  * ReservationVO
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-01T16:01:23.991+09:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-01T17:30:26.562+09:00")
 
 public class ReservationVO   {
   @JsonProperty("seat")
@@ -71,6 +71,9 @@ public class ReservationVO   {
 
   @JsonProperty("reservedAt")
   private DateTime reservedAt = null;
+
+  @JsonProperty("id")
+  private Long id = null;
 
   public ReservationVO seat(SeatVO seat) {
     this.seat = seat;
@@ -225,6 +228,27 @@ public class ReservationVO   {
     this.reservedAt = reservedAt;
   }
 
+  public ReservationVO id(Long id) {
+    this.id = id;
+    return this;
+  }
+
+   /**
+   * Get id
+   * @return id
+  **/
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -241,12 +265,13 @@ public class ReservationVO   {
         Objects.equals(this.from, reservation.from) &&
         Objects.equals(this.to, reservation.to) &&
         Objects.equals(this.status, reservation.status) &&
-        Objects.equals(this.reservedAt, reservation.reservedAt);
+        Objects.equals(this.reservedAt, reservation.reservedAt) &&
+        Objects.equals(this.id, reservation.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(seat, user, date, from, to, status, reservedAt);
+    return Objects.hash(seat, user, date, from, to, status, reservedAt, id);
   }
 
   @Override
@@ -261,6 +286,7 @@ public class ReservationVO   {
     sb.append("    to: ").append(toIndentedString(to)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    reservedAt: ").append(toIndentedString(reservedAt)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("}");
     return sb.toString();
   }
