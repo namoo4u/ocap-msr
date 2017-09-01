@@ -1,0 +1,342 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: "MSR API"
+  description: A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: Ocap API Team
+    email: credemol@gmail.com
+    url: http://meetup.com/Cloud-Native-Application
+  license:
+    name: MIT
+    url: http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
+host: MobileSeatReservationAPI-gse00002308.apaas.em2.oraclecloud.com
+basePath: /v1
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /seats:
+    get:
+      description: |
+        return all seats registered MSR system
+      operationId: findSeats
+      produces:
+        - application/json;charset=UTF-8            
+      parameters:
+        - name: seatNo
+          in: query
+          description: seatNo to filter by
+          required: false
+          type: string
+        - name: limit
+          in: query
+          description: maximum number of results to return
+          required: false
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: pet response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Seat'
+    post:
+      description: Creates a new seat
+      operationId: addSeat
+      consumes:
+        - application/json
+      produces:
+        - application/json;charset=UTF-8           
+      parameters:
+        - name: seat
+          in: body
+          description: Seat to add to the store
+          required: true
+          schema:
+            $ref: '#/definitions/NewSeat'
+      responses:
+        200:
+          description: seat response
+          schema:
+            $ref: '#/definitions/Seat'
+  '/seats/{id}':
+    get:
+      description: Returns a seat who has the id
+      operationId: findSeatById
+      produces:
+        - application/json            
+      parameters:
+        - name: id
+          in: path
+          description: ID of seat to fetch
+          required: true
+          type: integer
+          format: int64
+          default: 1
+      responses:
+        200:
+          description: seat response
+          schema:
+            type: object
+            $ref: '#/definitions/Seat'
+    put:
+      description: Updates a seat
+      operationId: addSeat
+      consumes:
+        - application/json
+      produces:
+        - application/json            
+      parameters:
+        - name: id
+          in: path
+          description: ID of seat to fetch
+          required: true
+          type: integer
+          format: int64  
+          default: 1
+        - name: seat
+          in: body
+          description: Seat to add to the store
+          required: true
+          schema:
+            $ref: '#/definitions/NewSeat'
+      responses:
+        200:
+          description: seat response
+          schema:
+            $ref: '#/definitions/Seat'            
+    delete:
+      description: deletes seat
+      operationId: deleteSeat
+      parameters:
+        - name: id
+          in: path
+          description: ID of seat to delete
+          required: true
+          type: integer
+          format: int64
+          default: 1
+      responses:
+        204:
+          description: seat deleted
+  /reservations: 
+    get:
+      description: find seats available on a certain date
+      operationId: findSeats
+      produces:
+        - application/json      
+      parameters:
+        - name: date
+          in: query
+          description: date when you want to reserve a seat
+          required: true
+          type: string
+          format: date
+          default: '2017-09-10'
+        - name: status
+          in: query
+          description: available or occupied, upon this value is null, all seats will be returned
+          required: false
+          type: string
+          enum:
+            - available
+            - occupied
+      responses:
+        200:
+          description: reservation response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Reservation'              
+    post:
+      description: reserve a seat
+      operationId: reserveSeat
+      consumes:
+        - application/json
+      produces:
+        - application/json           
+      parameters:
+        - name: body
+          in: body
+          description: reservation information
+          required: true
+          schema:
+            $ref: '#/definitions/NewReservation'
+      responses:
+        201:
+          description: return the detailed reservation information
+          schema:
+            $ref: '#/definitions/Reservation'
+  '/reservations/findByUser/{userId}':
+    get:
+      description: find reservation information by user
+      operationId: findReservationsByUser
+      produces:
+        - application/json        
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          type: integer
+          format: int64
+          default: 1
+        - name: from
+          in: query
+          description: the begining date of search
+          required: false
+          type: string
+          format: date
+          default: '2017-09-01'
+        - name: to
+          in: query
+          description: the end date of search
+          required: false
+          type: string
+          format: date
+          default: '2017-09-30'
+      responses:
+        200:
+          description: return reservation history
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Reservation'          
+  '/reservations/{reservationId}':          
+    get:
+      description: get detailed information of the reservation
+      operationId: viewReservation
+      produces:
+        - application/json        
+      parameters:
+        - name: reservationId
+          in: path
+          description: reservation id
+          required: true
+          type: integer
+          format: int64
+          default: 1
+      responses:
+        200:
+          description: return the detailed information of the reservation
+          schema:
+            $ref: '#/definitions/Reservation'
+    delete:
+      description: cancel the reservation
+      operationId: cancelReservation
+      parameters:
+        - name: reservationId
+          in: path
+          description: reservation id
+          required: true
+          type: integer
+          format: int64
+          default: 1
+      responses:
+        204:
+          description: reservation deleted
+    put:
+      description: update reservation
+      operationId: updateReservation
+      consumes:
+        - application/json
+      produces:
+        - application/json      
+      parameters:
+        - name: reservationId
+          in: path
+          description: reservation id
+          required: true
+          type: integer
+          format: int64
+          default: 1
+        - name: reservation
+          in: body
+          description: reservation information
+          required: true
+          schema:
+            $ref: '#/definitions/NewReservation'
+      responses:
+        '200':
+          description: return updated reservation
+          schema:
+            $ref: '#/definitions/Reservation'
+definitions:
+  Seat:
+    type: object
+    allOf:
+      - $ref: '#/definitions/NewSeat'
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+  NewSeat:
+    type: object
+    required:
+      - seatNo
+    properties:
+      seatNo:
+        type: string
+      location:
+        type: string
+  User:
+    type: object
+    required:
+      - id
+      - email
+    properties:
+      id:
+        type: integer
+        format: int64
+      email:
+        type: string
+  Reservation:
+    type: object
+    allOf: 
+      - $ref: '#/definitions/NewReservation'
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64  
+  NewReservation:
+    type: object
+    required:
+      - seat
+      - user
+      - date
+      - from
+      - to
+      - status
+      - reservedAt
+    properties:
+      seat: 
+        $ref: '#/definitions/Seat'
+      user:
+        $ref: '#/definitions/User'
+      date: 
+        type: string
+        format: date
+      from:
+        type: string
+        format: date-time
+      to:
+        type: string
+        format: date-time
+      status:
+        type: string
+        enum:
+          - available
+          - occupied
+      reservedAt:
+        type: string
+        format: date-time
