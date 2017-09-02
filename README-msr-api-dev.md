@@ -23,6 +23,16 @@ This document is aimed for developers who are responsible for developing msr-api
 		</dependency>
 ```
 
+## Change Java version to 1.8 
+```
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <springfox-version>2.6.1</springfox-version>
+    </properties>
+```
+
 ## Create packages
 * ocap.msr.entity 
 * ocap.msr.repository
@@ -144,10 +154,10 @@ public class Reservation {
 	java.sql.Date date;
 	
 	@Column
-	java.sql.Timestamp from;
+	java.sql.Timestamp startingTime;
 	
 	@Column
-	java.sql.Timestamp to;
+	java.sql.Timestamp endingTime;
 	
 	@Column
 	ReservationStatus status;
@@ -210,3 +220,25 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
 
 ```
 
+## Swagger2SpringBoot.java
+add annotation below to Swagger2SpringBoot class
+
+```
+@SpringBootApplication
+@EnableSwagger2
+@ComponentScan(basePackages = { "io.swagger", "ocap.msr.api", "ocap.msr.service" })
+@EnableJpaRepositories("ocap.msr.repository")
+@EntityScan("ocap.msr.entity")
+```
+
+## application.properties
+add mysql properties to application.properties file.
+
+```
+spring.jpa.hibernate.ddl-auto=create
+spring.datasource.url=jdbc:mysql://140.86.13.169:3306/MSR_DB
+spring.datasource.username=msrdb
+spring.datasource.password=KimKyudong1!
+spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target=my-schema.sql
+spring.jpa.properties.javax.persistence.schema-generation.scripts.action=create
+```

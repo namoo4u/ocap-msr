@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-01T18:32:45.212+09:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-02T17:35:19.863+09:00")
 
 @Api(value = "reservations", description = "the reservations API")
 public interface ReservationsApi {
@@ -47,7 +47,7 @@ public interface ReservationsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<List<ReservationVO>> findReservationsByUser(@ApiParam(value = "user id",required=true ) @PathVariable("userId") Long userId,@ApiParam(value = "the begining date of search", defaultValue = "2017-09-01") @RequestParam(value = "from", required = false, defaultValue="2017-09-01") LocalDate from,@ApiParam(value = "the end date of search", defaultValue = "2017-09-30") @RequestParam(value = "to", required = false, defaultValue="2017-09-30") LocalDate to);
+    ResponseEntity<List<ReservationVO>> findReservationsByUser(@ApiParam(value = "user id",required=true ) @PathVariable("userId") Long userId,@ApiParam(value = "the begining date of search", defaultValue = "2017-09-01") @RequestParam(value = "startingTime", required = false, defaultValue="2017-09-01") LocalDate startingTime,@ApiParam(value = "the end date of search", defaultValue = "2017-09-30") @RequestParam(value = "endingTime", required = false, defaultValue="2017-09-30") LocalDate endingTime);
 
 
     @ApiOperation(value = "", notes = "find seats available on a certain date", response = ReservationVO.class, responseContainer = "List", tags={  })

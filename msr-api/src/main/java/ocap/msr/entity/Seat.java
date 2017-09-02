@@ -12,7 +12,7 @@ public class Seat {
 	@GeneratedValue
 	private long id;
 	
-	@Column
+	@Column(unique=true)
 	private String seatNo;
 	
 	@Column

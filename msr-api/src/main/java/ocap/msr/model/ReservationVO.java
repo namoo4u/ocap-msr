@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
 /**
  * ReservationVO
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-01T18:32:45.212+09:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-02T17:35:19.863+09:00")
 
 public class ReservationVO   {
   @JsonProperty("seat")
@@ -26,14 +26,14 @@ public class ReservationVO   {
   @JsonProperty("user")
   private UserVO user = null;
 
-  @JsonProperty("date")
-  private LocalDate date = null;
+  @JsonProperty("reservationDate")
+  private LocalDate reservationDate = null;
 
-  @JsonProperty("from")
-  private DateTime from = null;
+  @JsonProperty("startingTime")
+  private DateTime startingTime = null;
 
-  @JsonProperty("to")
-  private DateTime to = null;
+  @JsonProperty("endingTime")
+  private DateTime endingTime = null;
 
   /**
    * Gets or Sets status
@@ -119,70 +119,70 @@ public class ReservationVO   {
     this.user = user;
   }
 
-  public ReservationVO date(LocalDate date) {
-    this.date = date;
+  public ReservationVO reservationDate(LocalDate reservationDate) {
+    this.reservationDate = reservationDate;
     return this;
   }
 
    /**
-   * Get date
-   * @return date
+   * Get reservationDate
+   * @return reservationDate
   **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
   @Valid
 
-  public LocalDate getDate() {
-    return date;
+  public LocalDate getReservationDate() {
+    return reservationDate;
   }
 
-  public void setDate(LocalDate date) {
-    this.date = date;
+  public void setReservationDate(LocalDate reservationDate) {
+    this.reservationDate = reservationDate;
   }
 
-  public ReservationVO from(DateTime from) {
-    this.from = from;
+  public ReservationVO startingTime(DateTime startingTime) {
+    this.startingTime = startingTime;
     return this;
   }
 
    /**
-   * Get from
-   * @return from
+   * Get startingTime
+   * @return startingTime
   **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
   @Valid
 
-  public DateTime getFrom() {
-    return from;
+  public DateTime getStartingTime() {
+    return startingTime;
   }
 
-  public void setFrom(DateTime from) {
-    this.from = from;
+  public void setStartingTime(DateTime startingTime) {
+    this.startingTime = startingTime;
   }
 
-  public ReservationVO to(DateTime to) {
-    this.to = to;
+  public ReservationVO endingTime(DateTime endingTime) {
+    this.endingTime = endingTime;
     return this;
   }
 
    /**
-   * Get to
-   * @return to
+   * Get endingTime
+   * @return endingTime
   **/
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
   @Valid
 
-  public DateTime getTo() {
-    return to;
+  public DateTime getEndingTime() {
+    return endingTime;
   }
 
-  public void setTo(DateTime to) {
-    this.to = to;
+  public void setEndingTime(DateTime endingTime) {
+    this.endingTime = endingTime;
   }
 
   public ReservationVO status(StatusEnum status) {
@@ -261,9 +261,9 @@ public class ReservationVO   {
     ReservationVO reservation = (ReservationVO) o;
     return Objects.equals(this.seat, reservation.seat) &&
         Objects.equals(this.user, reservation.user) &&
-        Objects.equals(this.date, reservation.date) &&
-        Objects.equals(this.from, reservation.from) &&
-        Objects.equals(this.to, reservation.to) &&
+        Objects.equals(this.reservationDate, reservation.reservationDate) &&
+        Objects.equals(this.startingTime, reservation.startingTime) &&
+        Objects.equals(this.endingTime, reservation.endingTime) &&
         Objects.equals(this.status, reservation.status) &&
         Objects.equals(this.reservedAt, reservation.reservedAt) &&
         Objects.equals(this.id, reservation.id);
@@ -271,7 +271,7 @@ public class ReservationVO   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(seat, user, date, from, to, status, reservedAt, id);
+    return Objects.hash(seat, user, reservationDate, startingTime, endingTime, status, reservedAt, id);
   }
 
   @Override
@@ -281,9 +281,9 @@ public class ReservationVO   {
     
     sb.append("    seat: ").append(toIndentedString(seat)).append("\n");
     sb.append("    user: ").append(toIndentedString(user)).append("\n");
-    sb.append("    date: ").append(toIndentedString(date)).append("\n");
-    sb.append("    from: ").append(toIndentedString(from)).append("\n");
-    sb.append("    to: ").append(toIndentedString(to)).append("\n");
+    sb.append("    reservationDate: ").append(toIndentedString(reservationDate)).append("\n");
+    sb.append("    startingTime: ").append(toIndentedString(startingTime)).append("\n");
+    sb.append("    endingTime: ").append(toIndentedString(endingTime)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    reservedAt: ").append(toIndentedString(reservedAt)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");

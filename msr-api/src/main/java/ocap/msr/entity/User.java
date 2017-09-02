@@ -18,7 +18,7 @@ public class User implements Serializable{
 	@GeneratedValue
 	private long id;
 	
-	@Column
+	@Column(unique=true)
 	private String email;
 	
 	@Column 
