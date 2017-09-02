@@ -1,5 +1,6 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
+hs_err_pid*.log
 
 ### STS ###
 .apt_generated
