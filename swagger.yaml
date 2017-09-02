@@ -187,14 +187,14 @@ paths:
           type: integer
           format: int64
           default: 1
-        - name: from
+        - name: startingTime
           in: query
           description: the begining date of search
           required: false
           type: string
           format: date
           default: '2017-09-01'
-        - name: to
+        - name: endingTime
           in: query
           description: the end date of search
           required: false
@@ -315,9 +315,9 @@ definitions:
     required:
       - seat
       - user
-      - date
-      - from
-      - to
+      - reservationDate
+      - startingTime
+      - endingTime
       - status
       - reservedAt
     properties:
@@ -325,13 +325,13 @@ definitions:
         $ref: '#/definitions/Seat'
       user:
         $ref: '#/definitions/User'
-      date: 
+      reservationDate: 
         type: string
         format: date
-      from:
+      startingTime:
         type: string
         format: date-time
-      to:
+      endingTime:
         type: string
         format: date-time
       status:
