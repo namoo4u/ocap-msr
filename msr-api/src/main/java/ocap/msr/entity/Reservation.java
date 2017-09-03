@@ -18,11 +18,9 @@ public class Reservation {
 	private long id;
 	
 	@ManyToOne
-	@Column(nullable=false)
 	private Seat seat;
 	
 	@ManyToOne
-	@Column(nullable=false)
 	private User user;
 	
 	@Column(nullable=false)
@@ -37,13 +35,13 @@ public class Reservation {
 	@Column
 	ReservationStatus status;
 	
-	@Column(nullable=false,insertable=false)
+	@Column(nullable=false, insertable=false, updatable=false)
 	@Temporal(TemporalType.TIMESTAMP)
-	java.sql.Timestamp reservedAt;
+	java.util.Calendar reservedAt;
 	
 	@Column(nullable=false, insertable=false, updatable=false)
 	@Temporal(TemporalType.TIMESTAMP)
-	java.sql.Timestamp lastModifiedAt;
+	java.util.Calendar lastModifiedAt;
 
 	public Reservation() {
 		super();
@@ -106,22 +104,21 @@ public class Reservation {
 		this.status = status;
 	}
 
-	public java.sql.Timestamp getReservedAt() {
+	public java.util.Calendar getReservedAt() {
 		return reservedAt;
 	}
 
-	public void setReservedAt(java.sql.Timestamp reservedAt) {
+	public void setReservedAt(java.util.Calendar reservedAt) {
 		this.reservedAt = reservedAt;
 	}
 
-	public java.sql.Timestamp getLastModifiedAt() {
+	public java.util.Calendar getLastModifiedAt() {
 		return lastModifiedAt;
 	}
 
-	public void setLastModifiedAt(java.sql.Timestamp lastModifiedAt) {
+	public void setLastModifiedAt(java.util.Calendar lastModifiedAt) {
 		this.lastModifiedAt = lastModifiedAt;
 	}
-
 
 	@Override
 	public int hashCode() {

@@ -1,4 +1,4 @@
-create table reservation (id bigint not null auto_increment, ending_time datetime, last_modified_at datetime, reservation_date date, reserved_at datetime, starting_time datetime, status integer, seat_id bigint, user_id bigint, primary key (id))
+create table reservation (id bigint not null auto_increment, ending_time datetime not null, last_modified_at datetime not null, reservation_date date not null, reserved_at datetime not null, starting_time datetime not null, status integer, seat_id bigint, user_id bigint, primary key (id))
 create table seat (id bigint not null auto_increment, location varchar(255), seat_no varchar(255), primary key (id))
 create table user (id bigint not null auto_increment, email varchar(255), password varchar(255), primary key (id))
 alter table seat add constraint UK_ncgg1tgerj73bpjsq4os267y unique (seat_no)
