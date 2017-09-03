@@ -132,13 +132,20 @@ paths:
       produces:
         - application/json      
       parameters:
-        - name: date
+        - name: startingTime
           in: query
-          description: date when you want to reserve a seat
+          description: starting time you want to reserve a seat
           required: true
           type: string
-          format: date
-          default: '2017-09-10'
+          format: date-time
+          default: '2017-09-10T09:00:00.00Z'
+        - name: endingTime
+          in: query
+          description: ending time you want to reserve a seat
+          required: true
+          type: string
+          format: date-time
+          default: '2017-09-10T16:00:00.00Z'          
         - name: status
           in: query
           description: available or occupied, upon this value is null, all seats will be returned
