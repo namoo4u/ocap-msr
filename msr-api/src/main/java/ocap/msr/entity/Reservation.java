@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Reservation {
@@ -16,27 +18,31 @@ public class Reservation {
 	private long id;
 	
 	@ManyToOne
+	@Column(nullable=false)
 	private Seat seat;
 	
 	@ManyToOne
+	@Column(nullable=false)
 	private User user;
 	
-	@Column
+	@Column(nullable=false)
 	java.sql.Date reservationDate;
 	
-	@Column
+	@Column(nullable=false)
 	java.sql.Timestamp startingTime;
 	
-	@Column
+	@Column(nullable=false)
 	java.sql.Timestamp endingTime;
 	
 	@Column
 	ReservationStatus status;
 	
-	@Column
+	@Column(nullable=false,insertable=false)
+	@Temporal(TemporalType.TIMESTAMP)
 	java.sql.Timestamp reservedAt;
 	
-	@Column
+	@Column(nullable=false, insertable=false, updatable=false)
+	@Temporal(TemporalType.TIMESTAMP)
 	java.sql.Timestamp lastModifiedAt;
 
 	public Reservation() {
