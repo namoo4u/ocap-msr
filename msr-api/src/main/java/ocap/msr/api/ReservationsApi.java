@@ -5,6 +5,7 @@
  */
 package ocap.msr.api;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import ocap.msr.model.NewReservationVO;
 import ocap.msr.model.ReservationVO;
@@ -23,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-02T17:35:19.863+09:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-03T09:39:10.915+09:00")
 
 @Api(value = "reservations", description = "the reservations API")
 public interface ReservationsApi {
@@ -58,7 +59,7 @@ public interface ReservationsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<List<ReservationVO>> findSeats( @NotNull@ApiParam(value = "date when you want to reserve a seat", required = true, defaultValue = "2017-09-10") @RequestParam(value = "date", required = true, defaultValue="2017-09-10") LocalDate date,@ApiParam(value = "available or occupied, upon this value is null, all seats will be returned", allowableValues = "available, occupied") @RequestParam(value = "status", required = false) String status);
+    ResponseEntity<List<ReservationVO>> findSeats( @NotNull@ApiParam(value = "starting time you want to reserve a seat", required = true, defaultValue = "2017-09-10T09:00:00.00Z") @RequestParam(value = "startingTime", required = true, defaultValue="2017-09-10T09:00:00.00Z") DateTime startingTime, @NotNull@ApiParam(value = "ending time you want to reserve a seat", required = true, defaultValue = "2017-09-10T16:00:00.00Z") @RequestParam(value = "endingTime", required = true, defaultValue="2017-09-10T16:00:00.00Z") DateTime endingTime,@ApiParam(value = "available or occupied, upon this value is null, all seats will be returned", allowableValues = "available, occupied") @RequestParam(value = "status", required = false) String status);
 
 
     @ApiOperation(value = "", notes = "reserve a seat", response = ReservationVO.class, tags={  })

@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 /**
  * SeatVO
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-02T17:35:19.863+09:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-03T09:39:10.915+09:00")
 
 public class SeatVO   {
   @JsonProperty("seatNo")
