@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import ocap.msr.model.NewReservationVO;
 import ocap.msr.model.ReservationVO;
+import ocap.msr.model.SeatVO;
 import ocap.msr.service.ReservationService;
 import io.swagger.annotations.*;
 
@@ -23,13 +24,13 @@ import java.util.List;
 
 import javax.validation.constraints.*;
 import javax.validation.Valid;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-03T09:39:10.915+09:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-04T12:45:48.978+09:00")
 
 @Controller
 public class ReservationsApiController implements ReservationsApi {
 
 	@Autowired
-	private ReservationService reservationService;
+	ReservationService reservationService;
 
     public ResponseEntity<Void> cancelReservation(@ApiParam(value = "reservation id",required=true ) @PathVariable("reservationId") Long reservationId) {
         // do some magic!
@@ -41,21 +42,28 @@ public class ReservationsApiController implements ReservationsApi {
     		}
     }
 
+    public ResponseEntity<List<SeatVO>> findAvailableSeats( @NotNull@ApiParam(value = "starting time you want to reserve a seat", required = true, defaultValue = "2017-09-10T09:00:00.00Z") @RequestParam(value = "startingTime", required = true, defaultValue="2017-09-10T09:00:00.00Z") DateTime startingTime,
+         @NotNull@ApiParam(value = "ending time you want to reserve a seat", required = true, defaultValue = "2017-09-10T16:00:00.00Z") @RequestParam(value = "endingTime", required = true, defaultValue="2017-09-10T16:00:00.00Z") DateTime endingTime) {
+        // do some magic!
+    		
+    		List<SeatVO> seats = reservationService.findAvailableSeats(
+    				new Date(startingTime.getMillis()), 
+    				new Date(endingTime.getMillis()));
+        return new ResponseEntity<List<SeatVO>>(seats, HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<ReservationVO>> findReservations( @NotNull@ApiParam(value = "starting time you want to reserve a seat", required = true, defaultValue = "2017-09-10T09:00:00.00Z") @RequestParam(value = "startingTime", required = true, defaultValue="2017-09-10T09:00:00.00Z") DateTime startingTime,
+         @NotNull@ApiParam(value = "ending time you want to reserve a seat", required = true, defaultValue = "2017-09-10T16:00:00.00Z") @RequestParam(value = "endingTime", required = true, defaultValue="2017-09-10T16:00:00.00Z") DateTime endingTime,
+        @ApiParam(value = "available or occupied, upon this value is null, all seats will be returned", allowableValues = "available, occupied") @RequestParam(value = "status", required = false) String status) {
+        // do some magic!
+        return new ResponseEntity<List<ReservationVO>>(HttpStatus.OK);
+    }
+
     public ResponseEntity<List<ReservationVO>> findReservationsByUser(@ApiParam(value = "user id",required=true ) @PathVariable("userId") Long userId,
         @ApiParam(value = "the begining date of search", defaultValue = "2017-09-01") @RequestParam(value = "startingTime", required = false, defaultValue="2017-09-01") LocalDate startingTime,
         @ApiParam(value = "the end date of search", defaultValue = "2017-09-30") @RequestParam(value = "endingTime", required = false, defaultValue="2017-09-30") LocalDate endingTime) {
         // do some magic!
         return new ResponseEntity<List<ReservationVO>>(HttpStatus.OK);
-    }
-
-    public ResponseEntity<List<ReservationVO>> findSeats( @NotNull@ApiParam(value = "starting time you want to reserve a seat", required = true, defaultValue = "2017-09-10T09:00:00.00Z") @RequestParam(value = "startingTime", required = true, defaultValue="2017-09-10T09:00:00.00Z") DateTime startingTime,
-         @NotNull@ApiParam(value = "ending time you want to reserve a seat", required = true, defaultValue = "2017-09-10T16:00:00.00Z") @RequestParam(value = "endingTime", required = true, defaultValue="2017-09-10T16:00:00.00Z") DateTime endingTime,
-        @ApiParam(value = "available or occupied, upon this value is null, all seats will be returned", allowableValues = "available, occupied") @RequestParam(value = "status", required = false) String status) {
-        // do some magic!
-    		Date _startingTime = new Date(startingTime.getMillis());
-    		Date _endingTime = new Date(endingTime.getMillis());
-    		//List<SeatVO> seats = reservationService.findSeats(_startingTime, _endingTime);
-        return new ResponseEntity<List<ReservationVO>>( HttpStatus.OK);
     }
 
     public ResponseEntity<ReservationVO> reserveSeat(@ApiParam(value = "reservation information" ,required=true )  @Valid @RequestBody NewReservationVO body) {

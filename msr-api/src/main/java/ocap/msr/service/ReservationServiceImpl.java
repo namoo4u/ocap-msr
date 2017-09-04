@@ -28,7 +28,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public List<SeatVO> findSeats(Date date) {
+	public List<SeatVO> findAvailableSeats(Date date) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		
@@ -41,11 +41,11 @@ public class ReservationServiceImpl implements ReservationService {
 		
 		c.set(Calendar.HOUR_OF_DAY, 18);
 		Date endingTime = c.getTime();
-		return findSeats(startingTime, endingTime);
+		return findAvailableSeats(startingTime, endingTime);
 	}
 
 	@Override
-	public List<SeatVO> findSeats(Date startingTime, Date endingTime) {
+	public List<SeatVO> findAvailableSeats(Date startingTime, Date endingTime) {
 		List<Seat> seats = reservationRepository.findSeatsByStartTimeAndEndingTime(
 				new Timestamp(startingTime.getTime()), new Timestamp(endingTime.getTime()));
 		

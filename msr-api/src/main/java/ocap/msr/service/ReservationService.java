@@ -7,6 +7,6 @@ import ocap.msr.model.SeatVO;
 
 public interface ReservationService {
 	public void cancelReservation(long reservationId);
-	public List<SeatVO> findSeats(Date date);
-	public List<SeatVO> findSeats(Date startingTime, Date endingTime);
+	public List<SeatVO> findAvailableSeats(Date date);
+	public List<SeatVO> findAvailableSeats(Date startingTime, Date endingTime);
 }
