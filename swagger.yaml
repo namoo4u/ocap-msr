@@ -138,14 +138,12 @@ paths:
           required: false
           type: string
           format: date-time
-          default: '2017-09-10T09:00:00.000Z'
         - name: endingTime
           in: query
           description: ending time you want to reserve a seat
           required: false
           type: string
           format: date-time
-          default: '2017-09-10T16:00:00.000Z'          
         - name: status
           in: query
           description: available or occupied, upon this value is null, all seats will be returned
@@ -174,14 +172,12 @@ paths:
           required: true
           type: string
           format: date-time
-          default: '2017-09-10T09:00:00.000Z'
         - name: endingTime
           in: query
           description: ending time you want to reserve a seat
           required: true
           type: string
           format: date-time
-          default: '2017-09-10T16:00:00.000Z'          
       responses:
         200:
           description: reservation response
@@ -228,14 +224,12 @@ paths:
           required: false
           type: string
           format: date-time
-          default: '2017-09-01T09:00:00.000Z'
         - name: endingTime
           in: query
-          description: the end date of search
+          description: the end date of search. '2017-09-30T18:00:00.000Z'
           required: false
           type: string
           format: date-time
-          default: '2017-09-30T18:00:00.000Z'
       responses:
         200:
           description: return reservation history
