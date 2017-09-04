@@ -1,7 +1,9 @@
 package ocap.msr;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -14,5 +16,10 @@ public class MsrApplication  {
 
     public static void main(String[] args) throws Exception {
         new SpringApplication(MsrApplication.class).run(args);
+    }
+    
+    @Bean
+    public ModelMapper modelMapper() {
+    		return new ModelMapper(); 
     }
 }
