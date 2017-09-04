@@ -21,6 +21,12 @@ This document is aimed for developers who are responsible for developing msr-api
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>        
 ```
 
 ## Change Java version to 1.8 
@@ -221,7 +227,11 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
 ```
 
 ## Swagger2SpringBoot.java
-add annotation below to Swagger2SpringBoot class
+This part is deprecated. We decided to create new SpringBootApplication name ocap.msr.MsrApplication.java 
+
+So you need to add comments to @SpringBootApplication and @EnableSwagger2 and get rid of main method
+
+<s>add annotation below to Swagger2SpringBoot class</s>
 
 ```
 @SpringBootApplication
@@ -229,6 +239,34 @@ add annotation below to Swagger2SpringBoot class
 @ComponentScan(basePackages = { "io.swagger", "ocap.msr.api", "ocap.msr.service" })
 @EnableJpaRepositories("ocap.msr.repository")
 @EntityScan("ocap.msr.entity")
+```
+
+## MsrApplication.java
+
+### How Spring Boot's context is resolved from a test:
+>The search algorithm works up from the package that contains the test until it finds a @SpringBootApplication or @SpringBootConfiguration annotated class. As long as you’ve structure your code in a sensible way your main configuration is usually found.
+
+### About using the default package with Spring Boot:
+>When a class doesn’t include a package declaration it is considered to be in the “default package”. The use of the “default package” is generally discouraged, and should be avoided. It can cause particular problems for Spring Boot applications that use @ComponentScan, @EntityScan or @SpringBootApplication annotations, since every class from every jar, will be read.
+>
+>We recommend that you follow Java’s recommended package naming conventions and use a reversed domain name (for example, com.example.project).
+
+```
+package ocap.msr;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@SpringBootApplication
+@EnableSwagger2
+public class MsrApplication  {
+
+    public static void main(String[] args) throws Exception {
+        new SpringApplication(MsrApplication.class).run(args);
+    }
+}
 ```
 
 ## application.properties
@@ -241,4 +279,9 @@ spring.datasource.username=msrdb
 spring.datasource.password=KimKyudong1!
 spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target=my-schema.sql
 spring.jpa.properties.javax.persistence.schema-generation.scripts.action=create
+
+spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.properties.hibernate.use_sql_comments=true
+spring.jpa.properties.hibernate.format_sql=true
 ```
+

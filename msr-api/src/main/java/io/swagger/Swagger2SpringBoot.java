@@ -10,11 +10,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication
-@EnableSwagger2
-@ComponentScan(basePackages = { "io.swagger", "ocap.msr.api", "ocap.msr.service" })
-@EnableJpaRepositories("ocap.msr.repository")
-@EntityScan("ocap.msr.entity")
+//@SpringBootApplication
+//@EnableSwagger2
+//@ComponentScan(basePackages = { "io.swagger", "ocap.msr.api", "ocap.msr.service" })
+//@EnableJpaRepositories("ocap.msr.repository")
+//@EntityScan("ocap.msr.entity")
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override
@@ -24,9 +24,9 @@ public class Swagger2SpringBoot implements CommandLineRunner {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        new SpringApplication(Swagger2SpringBoot.class).run(args);
-    }
+//    public static void main(String[] args) throws Exception {
+//        new SpringApplication(Swagger2SpringBoot.class).run(args);
+//    }
 
     class ExitException extends RuntimeException implements ExitCodeGenerator {
         private static final long serialVersionUID = 1L;
