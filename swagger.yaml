@@ -127,8 +127,8 @@ paths:
           description: seat deleted
   /reservations: 
     get:
-      description: find seats available on a certain date
-      operationId: findSeats
+      description: find reservations available on a certain date
+      operationId: findReservations
       produces:
         - application/json      
       parameters:
@@ -160,7 +160,35 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/Reservation'              
+              $ref: '#/definitions/Reservation'  
+  /reservations/findAvailableSeats: 
+    get:
+      description: find available seats on a certain date
+      operationId: findAvailableSeats
+      produces:
+        - application/json      
+      parameters:
+        - name: startingTime
+          in: query
+          description: starting time you want to reserve a seat
+          required: true
+          type: string
+          format: date-time
+          default: '2017-09-10T09:00:00.00Z'
+        - name: endingTime
+          in: query
+          description: ending time you want to reserve a seat
+          required: true
+          type: string
+          format: date-time
+          default: '2017-09-10T16:00:00.00Z'          
+      responses:
+        200:
+          description: reservation response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Seat'                
     post:
       description: reserve a seat
       operationId: reserveSeat
