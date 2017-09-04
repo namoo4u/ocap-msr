@@ -87,7 +87,7 @@ paths:
             $ref: '#/definitions/Seat'
     put:
       description: Updates a seat
-      operationId: addSeat
+      operationId: updateSeat
       consumes:
         - application/json
       produces:
