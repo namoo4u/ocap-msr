@@ -11,6 +11,8 @@ import ocap.msr.model.ReservationVO;
 import ocap.msr.model.SeatVO;
 
 import io.swagger.annotations.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-04T15:27:47.741+09:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-04T15:39:16.285+09:00")
 
 @Api(value = "reservations", description = "the reservations API")
 public interface ReservationsApi {
@@ -48,7 +50,7 @@ public interface ReservationsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<List<SeatVO>> findAvailableSeats( @NotNull@ApiParam(value = "starting time you want to reserve a seat", required = true, defaultValue = "2017-09-10T09:00:00.000Z") @RequestParam(value = "startingTime", required = true, defaultValue="2017-09-10T09:00:00.000Z") DateTime startingTime, @NotNull@ApiParam(value = "ending time you want to reserve a seat", required = true, defaultValue = "2017-09-10T16:00:00.000Z") @RequestParam(value = "endingTime", required = true, defaultValue="2017-09-10T16:00:00.000Z") DateTime endingTime);
+    ResponseEntity<List<SeatVO>> findAvailableSeats( @NotNull@ApiParam(value = "starting time you want to reserve a seat", required = true) @RequestParam(value = "startingTime", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime startingTime, @NotNull@ApiParam(value = "ending time you want to reserve a seat", required = true) @RequestParam(value = "endingTime", required = true) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime endingTime);
 
 
     @ApiOperation(value = "", notes = "find reservations available on a certain date", response = ReservationVO.class, responseContainer = "List", tags={  })
@@ -59,7 +61,7 @@ public interface ReservationsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<List<ReservationVO>> findReservations(@ApiParam(value = "starting time you want to reserve a seat", defaultValue = "2017-09-10T09:00:00.000Z") @RequestParam(value = "startingTime", required = false, defaultValue="2017-09-10T09:00:00.000Z") DateTime startingTime,@ApiParam(value = "ending time you want to reserve a seat", defaultValue = "2017-09-10T16:00:00.000Z") @RequestParam(value = "endingTime", required = false, defaultValue="2017-09-10T16:00:00.000Z") DateTime endingTime,@ApiParam(value = "available or occupied, upon this value is null, all seats will be returned", allowableValues = "available, occupied") @RequestParam(value = "status", required = false) String status);
+    ResponseEntity<List<ReservationVO>> findReservations(@ApiParam(value = "starting time you want to reserve a seat") @RequestParam(value = "startingTime", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime startingTime,@ApiParam(value = "ending time you want to reserve a seat") @RequestParam(value = "endingTime", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime endingTime,@ApiParam(value = "available or occupied, upon this value is null, all seats will be returned", allowableValues = "available, occupied") @RequestParam(value = "status", required = false) String status);
 
 
     @ApiOperation(value = "", notes = "find reservation information by user", response = ReservationVO.class, responseContainer = "List", tags={  })
@@ -70,14 +72,14 @@ public interface ReservationsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<List<ReservationVO>> findReservationsByUser(@ApiParam(value = "user id",required=true ) @PathVariable("userId") Long userId,@ApiParam(value = "the begining date of search", defaultValue = "2017-09-01T09:00:00.000Z") @RequestParam(value = "startingTime", required = false, defaultValue="2017-09-01T09:00:00.000Z") DateTime startingTime,@ApiParam(value = "the end date of search", defaultValue = "2017-09-30T18:00:00.000Z") @RequestParam(value = "endingTime", required = false, defaultValue="2017-09-30T18:00:00.000Z") DateTime endingTime);
+    ResponseEntity<List<ReservationVO>> findReservationsByUser(@ApiParam(value = "user id",required=true ) @PathVariable("userId") Long userId,@ApiParam(value = "the begining date of search") @RequestParam(value = "startingTime", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime startingTime,@ApiParam(value = "the end date of search. '2017-09-30T18:00:00.000Z'") @RequestParam(value = "endingTime", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime endingTime);
 
 
     @ApiOperation(value = "", notes = "reserve a seat", response = ReservationVO.class, tags={  })
     @ApiResponses(value = { 
         @ApiResponse(code = 201, message = "return the detailed reservation information", response = ReservationVO.class) })
     
-    @RequestMapping(value = "/reservations/findAvailableSeats",
+    @RequestMapping(value = "/reservations",
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)

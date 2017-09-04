@@ -8,9 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication
-@EnableSwagger2
-@ComponentScan(basePackages = { "io.swagger", "ocap.msr.api" })
+//@SpringBootApplication
+//@EnableSwagger2
+//@ComponentScan(basePackages = { "io.swagger", "ocap.msr.api" })
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override
@@ -20,9 +20,9 @@ public class Swagger2SpringBoot implements CommandLineRunner {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        new SpringApplication(Swagger2SpringBoot.class).run(args);
-    }
+//    public static void main(String[] args) throws Exception {
+//        new SpringApplication(Swagger2SpringBoot.class).run(args);
+//    }
 
     class ExitException extends RuntimeException implements ExitCodeGenerator {
         private static final long serialVersionUID = 1L;

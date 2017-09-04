@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import ocap.msr.entity.Reservation;
 import ocap.msr.entity.Seat;
+import ocap.msr.model.NewReservationVO;
 import ocap.msr.model.ReservationVO;
 import ocap.msr.model.SeatVO;
 
@@ -33,6 +34,12 @@ public class MsrConverter {
 		Reservation entity = modelMapper.map(vo, Reservation.class);
 		
 		return entity;
+	}
+	
+	public Reservation toEntity(NewReservationVO vo) {
+		Reservation entity = modelMapper.map(vo, Reservation.class);
+		
+		return entity;		
 	}
 	
 	public SeatVO toValueObject(Seat seat) {

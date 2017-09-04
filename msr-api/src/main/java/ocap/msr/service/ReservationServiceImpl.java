@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import ocap.msr.entity.Reservation;
 import ocap.msr.entity.Seat;
+import ocap.msr.model.NewReservationVO;
 import ocap.msr.model.ReservationVO;
 import ocap.msr.model.SeatVO;
 import ocap.msr.repository.ReservationRepository;
@@ -64,10 +65,49 @@ public class ReservationServiceImpl implements ReservationService {
 			reservations = new ArrayList<>();
 			reservationRepository.findAll().iterator().forEachRemaining(reservations::add);
 		} else {
+			Timestamp starting = new Timestamp(0L);
+			Timestamp ending = new Timestamp(Long.MAX_VALUE);
 			
+			if(startingTime != null) {
+				starting.setTime(startingTime.getMillis());
+			}
+			if(endingTime != null) {
+				ending.setTime(endingTime.getMillis());
+			}
+			reservations = reservationRepository.findByPeriod(starting, ending);
 		}
 		return reservations.stream().map(converter::toValueObject).collect(Collectors.toList());
 	}
+
+	@Override
+	public List<ReservationVO> findByUser(long userId, DateTime startingTime, DateTime endingTime) {
+		List<Reservation> reservations = null;
+		if(startingTime == null && endingTime == null) {
+			reservations = reservationRepository.findByUserId(userId);
+		} else {
+			Timestamp starting = new Timestamp(0L);
+			Timestamp ending = new Timestamp(Long.MAX_VALUE);
+			
+			if(startingTime != null) {
+				starting.setTime(startingTime.getMillis());
+			}
+			if(endingTime != null) {
+				ending.setTime(endingTime.getMillis());
+			}
+			reservations = reservationRepository.findByUserIdAndPeriod(userId, starting, ending);
+		}
+		return reservations.stream().map(converter::toValueObject).collect(Collectors.toList());
+	}
+
+	@Override
+	public ReservationVO reserveSeat(NewReservationVO newReservation) {
+		Reservation entity = converter.toEntity(newReservation);
+		
+		return converter.toValueObject(reservationRepository.save(entity));
+	}
+	
+	
+	
 	
 	
 
