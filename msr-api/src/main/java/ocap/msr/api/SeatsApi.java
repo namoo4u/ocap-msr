@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import javax.validation.constraints.*;
 import javax.validation.Valid;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-04T15:21:36.577+09:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-04T15:27:47.741+09:00")
 
 @Api(value = "seats", description = "the seats API")
 public interface SeatsApi {
@@ -36,17 +36,6 @@ public interface SeatsApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<SeatVO> addSeat(@ApiParam(value = "Seat to add to the store" ,required=true )  @Valid @RequestBody NewSeatVO seat);
-
-
-    @ApiOperation(value = "", notes = "Updates a seat", response = SeatVO.class, tags={  })
-    @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "seat response", response = SeatVO.class) })
-    
-    @RequestMapping(value = "/seats/{id}",
-        produces = { "application/json" }, 
-        consumes = { "application/json" },
-        method = RequestMethod.PUT)
-    ResponseEntity<SeatVO> addSeat(@ApiParam(value = "ID of seat to fetch",required=true ) @PathVariable("id") Long id,@ApiParam(value = "Seat to add to the store" ,required=true )  @Valid @RequestBody NewSeatVO seat);
 
 
     @ApiOperation(value = "", notes = "deletes seat", response = Void.class, tags={  })
@@ -80,5 +69,16 @@ public interface SeatsApi {
         consumes = { "application/json" },
         method = RequestMethod.GET)
     ResponseEntity<List<SeatVO>> findSeats(@ApiParam(value = "seatNo to filter by") @RequestParam(value = "seatNo", required = false) String seatNo,@ApiParam(value = "maximum number of results to return") @RequestParam(value = "limit", required = false) Integer limit);
+
+
+    @ApiOperation(value = "", notes = "Updates a seat", response = SeatVO.class, tags={  })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "seat response", response = SeatVO.class) })
+    
+    @RequestMapping(value = "/seats/{id}",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.PUT)
+    ResponseEntity<SeatVO> updateSeat(@ApiParam(value = "ID of seat to fetch",required=true ) @PathVariable("id") Long id,@ApiParam(value = "Seat to add to the store" ,required=true )  @Valid @RequestBody NewSeatVO seat);
 
 }
