@@ -1,20 +1,24 @@
 package ocap.msr.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ocap.msr.entity.Reservation;
 import ocap.msr.entity.Seat;
+import ocap.msr.model.ReservationVO;
 import ocap.msr.model.SeatVO;
 import ocap.msr.repository.ReservationRepository;
 import ocap.msr.util.MsrConverter;
 
-@Service
+@Service("reservationService")
 public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private MsrConverter converter;
@@ -37,19 +41,34 @@ public class ReservationServiceImpl implements ReservationService {
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.MILLISECOND, 0);
 		
-		Date startingTime = c.getTime();
+		DateTime startingTime = new DateTime(c.getTimeInMillis());
 		
 		c.set(Calendar.HOUR_OF_DAY, 18);
-		Date endingTime = c.getTime();
+		DateTime endingTime = new DateTime(c.getTimeInMillis());
 		return findAvailableSeats(startingTime, endingTime);
 	}
 
 	@Override
-	public List<SeatVO> findAvailableSeats(Date startingTime, Date endingTime) {
+	public List<SeatVO> findAvailableSeats(DateTime startingTime, DateTime endingTime) {
 		List<Seat> seats = reservationRepository.findSeatsByStartTimeAndEndingTime(
-				new Timestamp(startingTime.getTime()), new Timestamp(endingTime.getTime()));
+				new Timestamp(startingTime.getMillis()), new Timestamp(endingTime.getMillis()));
 		
 		return seats.stream().map( converter::toValueObject).collect(Collectors.toList());
 	}
+
+	@Override
+	public List<ReservationVO> findReservations(DateTime startingTime, DateTime endingTime) {
+		// TODO Auto-generated method stub
+		List<Reservation> reservations = null;
+		if(startingTime == null && endingTime == null) {
+			reservations = new ArrayList<>();
+			reservationRepository.findAll().iterator().forEachRemaining(reservations::add);
+		} else {
+			
+		}
+		return reservations.stream().map(converter::toValueObject).collect(Collectors.toList());
+	}
+	
+	
 
 }

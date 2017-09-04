@@ -27,6 +27,11 @@ This document is aimed for developers who are responsible for developing msr-api
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>        
+		<dependency>
+		    <groupId>org.modelmapper</groupId>
+		    <artifactId>modelmapper</artifactId>
+		    <version>0.7.4</version>
+		</dependency>          
 ```
 
 ## Change Java version to 1.8 
@@ -254,6 +259,7 @@ So you need to add comments to @SpringBootApplication and @EnableSwagger2 and ge
 ```
 package ocap.msr;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -266,6 +272,11 @@ public class MsrApplication  {
     public static void main(String[] args) throws Exception {
         new SpringApplication(MsrApplication.class).run(args);
     }
+
+    @Bean
+    public ModelMapper modelMapper() {
+    		return new ModelMapper(); 
+    }    
 }
 ```
 
@@ -283,5 +294,16 @@ spring.jpa.properties.javax.persistence.schema-generation.scripts.action=create
 spring.jpa.properties.hibernate.show_sql=true
 spring.jpa.properties.hibernate.use_sql_comments=true
 spring.jpa.properties.hibernate.format_sql=true
+```
+
+
+## API and APIController
+add @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") annotation to a parameter which indicates date-time
+```
+    @RequestMapping(value = "/reservations",
+        produces = { "application/json" }, 
+        consumes = { "application/json" },
+        method = RequestMethod.GET)
+    ResponseEntity<List<ReservationVO>> findReservations( @NotNull@ApiParam(value = "starting time you want to reserve a seat", required = false) @RequestParam(value = "startingTime", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime startingTime, @NotNull@ApiParam(value = "ending time you want to reserve a seat", required = false) @RequestParam(value = "endingTime", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime endingTime,@ApiParam(value = "available or occupied, upon this value is null, all seats will be returned", allowableValues = "available, occupied") @RequestParam(value = "status", required = false) String status);
 ```
 

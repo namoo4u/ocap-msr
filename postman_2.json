@@ -1,0 +1,422 @@
+{
+  "info": {
+    "name": "MSR API",
+    "_postman_id": "681fc406-113b-4532-877d-58704f2c868a",
+    "description": "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/"
+  },
+  "item": [
+    {
+      "name": "Folder",
+      "item": [
+        {
+          "id": "8adb39a5-d678-4587-8718-7238a3283063",
+          "name": "findSeats",
+          "request": {
+            "url": "https://MobileSeatReservationAPI-gse00002308.apaas.em2.oraclecloud.com/v1/seats?seatNo=seatNo&limit=41",
+            "method": "GET",
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": [
+            {
+              "status": "pet response",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "return all seats registered MSR system\n",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "df04d095-0693-4b46-abb4-189ca11487cc",
+          "name": "addSeat",
+          "request": {
+            "url": "https://MobileSeatReservationAPI-gse00002308.apaas.em2.oraclecloud.com/v1/seats",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=utf-8",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"seatNo\":\"seatNo\",\"location\":\"location\"}"
+            }
+          },
+          "response": [
+            {
+              "status": "seat response",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "Creates a new seat",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "de2beaca-e70a-4b5e-b292-3a52be2a15a5",
+          "name": "findSeatById",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "mobileseatreservationapi-gse00002308.apaas.em2.oraclecloud.com",
+              "path": [
+                "v1",
+                "seats/:id"
+              ],
+              "variable": [
+                {
+                  "id": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "method": "GET",
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": [
+            {
+              "status": "seat response",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "Returns a seat who has the id",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "de0b20d3-e90c-47a8-8c21-34f0f3b30eca",
+          "name": "addSeat",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "mobileseatreservationapi-gse00002308.apaas.em2.oraclecloud.com",
+              "path": [
+                "v1",
+                "seats/:id"
+              ],
+              "variable": [
+                {
+                  "id": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=utf-8",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"seatNo\":\"seatNo\",\"location\":\"location\"}"
+            }
+          },
+          "response": [
+            {
+              "status": "seat response",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "Updates a seat",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "6eaa5522-e865-438c-9cbf-83720a6ae621",
+          "name": "deleteSeat",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "mobileseatreservationapi-gse00002308.apaas.em2.oraclecloud.com",
+              "path": [
+                "v1",
+                "seats/:id"
+              ],
+              "variable": [
+                {
+                  "id": "id",
+                  "value": "1"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": [
+            {
+              "status": "seat deleted",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "deletes seat",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "ae8db097-ca3f-4953-9da0-4fb54c13a257",
+          "name": "findReservations",
+          "request": {
+            "url": "https://MobileSeatReservationAPI-gse00002308.apaas.em2.oraclecloud.com/v1/reservations?startingTime=2017-09-04T03%3A56%3A09.5322391Z&endingTime=2017-09-04T03%3A56%3A09.5322391Z&status=available",
+            "method": "GET",
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": [
+            {
+              "status": "reservation response",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "find reservations available on a certain date",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "ca12a396-c79b-41bf-8992-adc73ddbacc1",
+          "name": "findAvailableSeats",
+          "request": {
+            "url": "https://MobileSeatReservationAPI-gse00002308.apaas.em2.oraclecloud.com/v1/reservations/findAvailableSeats?startingTime=2017-09-04T03%3A56%3A09.5322391Z&endingTime=2017-09-04T03%3A56%3A09.5322391Z",
+            "method": "GET",
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": [
+            {
+              "status": "reservation response",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "find available seats on a certain date",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "b142e75d-abea-4e7a-9457-d6f02b7847dd",
+          "name": "reserveSeat",
+          "request": {
+            "url": "https://MobileSeatReservationAPI-gse00002308.apaas.em2.oraclecloud.com/v1/reservations/findAvailableSeats",
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=utf-8",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"seat\":{\"seatNo\":\"seatNo\",\"id\":76,\"location\":\"location\"},\"user\":{\"id\":76,\"email\":\"email\",\"password\":\"password\"},\"reservationDate\":\"04-09-2017\",\"startingTime\":\"2017-09-04T03:56:09.5322391Z\",\"endingTime\":\"2017-09-04T03:56:09.5322391Z\",\"status\":\"available\",\"reservedAt\":\"2017-09-04T03:56:09.5322391Z\"}"
+            }
+          },
+          "response": [
+            {
+              "status": "return the detailed reservation information",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "reserve a seat",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "ea540429-10f0-4054-a86c-f7b225150113",
+          "name": "findReservationsByUser",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "mobileseatreservationapi-gse00002308.apaas.em2.oraclecloud.com",
+              "path": [
+                "v1",
+                "reservations/findByUser/:userId"
+              ],
+              "query": [
+                {
+                  "key": "startingTime",
+                  "value": "04-09-2017",
+                  "disabled": false
+                },
+                {
+                  "key": "endingTime",
+                  "value": "04-09-2017",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "id": "userId",
+                  "value": "1"
+                }
+              ]
+            },
+            "method": "GET",
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": [
+            {
+              "status": "return reservation history",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "find reservation information by user",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "c914129c-2b59-4e97-be76-96bdaf9ec063",
+          "name": "viewReservation",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "mobileseatreservationapi-gse00002308.apaas.em2.oraclecloud.com",
+              "path": [
+                "v1",
+                "reservations/:reservationId"
+              ],
+              "variable": [
+                {
+                  "id": "reservationId",
+                  "value": "1"
+                }
+              ]
+            },
+            "method": "GET",
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": [
+            {
+              "status": "return the detailed information of the reservation",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "get detailed information of the reservation",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "061b1f4d-6425-4024-9652-0d18398326c4",
+          "name": "updateReservation",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "mobileseatreservationapi-gse00002308.apaas.em2.oraclecloud.com",
+              "path": [
+                "v1",
+                "reservations/:reservationId"
+              ],
+              "variable": [
+                {
+                  "id": "reservationId",
+                  "value": "1"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "disabled": false
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json;charset=utf-8",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"seat\":{\"seatNo\":\"seatNo\",\"id\":168,\"location\":\"location\"},\"user\":{\"id\":168,\"email\":\"email\",\"password\":\"password\"},\"reservationDate\":\"04-09-2017\",\"startingTime\":\"2017-09-04T03:56:09.547904Z\",\"endingTime\":\"2017-09-04T03:56:09.547904Z\",\"status\":\"available\",\"reservedAt\":\"2017-09-04T03:56:09.547904Z\"}"
+            }
+          },
+          "response": [
+            {
+              "status": "return updated reservation",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "update reservation",
+            "type": "text/markdown"
+          }
+        },
+        {
+          "id": "18abdc25-2f4f-4290-b2e4-f9c589c6dea3",
+          "name": "cancelReservation",
+          "request": {
+            "url": {
+              "protocol": "https",
+              "host": "mobileseatreservationapi-gse00002308.apaas.em2.oraclecloud.com",
+              "path": [
+                "v1",
+                "reservations/:reservationId"
+              ],
+              "variable": [
+                {
+                  "id": "reservationId",
+                  "value": "1"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "body": {
+              "mode": "raw"
+            }
+          },
+          "response": [
+            {
+              "status": "reservation deleted",
+              "code": 200
+            }
+          ],
+          "description": {
+            "content": "cancel the reservation",
+            "type": "text/markdown"
+          }
+        }
+      ]
+    }
+  ]
+}

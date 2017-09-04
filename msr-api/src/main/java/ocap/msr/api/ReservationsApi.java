@@ -12,6 +12,8 @@ import ocap.msr.model.ReservationVO;
 import ocap.msr.model.SeatVO;
 
 import io.swagger.annotations.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,7 +62,7 @@ public interface ReservationsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
-    ResponseEntity<List<ReservationVO>> findReservations( @NotNull@ApiParam(value = "starting time you want to reserve a seat", required = true, defaultValue = "2017-09-10T09:00:00.00Z") @RequestParam(value = "startingTime", required = true, defaultValue="2017-09-10T09:00:00.00Z") DateTime startingTime, @NotNull@ApiParam(value = "ending time you want to reserve a seat", required = true, defaultValue = "2017-09-10T16:00:00.00Z") @RequestParam(value = "endingTime", required = true, defaultValue="2017-09-10T16:00:00.00Z") DateTime endingTime,@ApiParam(value = "available or occupied, upon this value is null, all seats will be returned", allowableValues = "available, occupied") @RequestParam(value = "status", required = false) String status);
+    ResponseEntity<List<ReservationVO>> findReservations( @NotNull@ApiParam(value = "starting time you want to reserve a seat", required = false) @RequestParam(value = "startingTime", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime startingTime, @NotNull@ApiParam(value = "ending time you want to reserve a seat", required = false) @RequestParam(value = "endingTime", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime endingTime,@ApiParam(value = "available or occupied, upon this value is null, all seats will be returned", allowableValues = "available, occupied") @RequestParam(value = "status", required = false) String status);
 
 
     @ApiOperation(value = "", notes = "find reservation information by user", response = ReservationVO.class, responseContainer = "List", tags={  })
