@@ -1,5 +1,8 @@
 package ocap.msr.util;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.modelmapper.ModelMapper;
@@ -7,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ocap.msr.entity.Reservation;
+import ocap.msr.entity.ReservationStatus;
 import ocap.msr.entity.Seat;
+import ocap.msr.entity.User;
 import ocap.msr.model.NewReservationVO;
+import ocap.msr.model.NewSeatVO;
 import ocap.msr.model.ReservationVO;
 import ocap.msr.model.SeatVO;
 
@@ -37,8 +43,21 @@ public class MsrConverter {
 	}
 	
 	public Reservation toEntity(NewReservationVO vo) {
-		Reservation entity = modelMapper.map(vo, Reservation.class);
+		//Reservation entity = modelMapper.map(vo, Reservation.class);
+		Reservation entity = new Reservation();
 		
+		User user = new User();
+		user.setId(vo.getUserId());
+		entity.setUser(user);
+		
+		Seat seat = new Seat();
+		seat.setId(vo.getSeatId());
+		entity.setSeat(seat);
+		
+		entity.setReservationDate(new java.sql.Date(vo.getReservationDate().toDate().getTime()));
+		entity.setStartingTime(new Timestamp(vo.getStartingTime().getMillis()));
+		entity.setEndingTime(new Timestamp(vo.getEndingTime().getMillis()));
+		entity.setStatus(ReservationStatus.OCCUPIED);
 		return entity;		
 	}
 	
@@ -48,6 +67,12 @@ public class MsrConverter {
 	}
 	
 	public Seat toEntity(SeatVO vo) {
+		Seat entity = modelMapper.map(vo, Seat.class);
+		
+		return entity;
+	}
+	
+	public Seat toEntity(NewSeatVO vo) {
 		Seat entity = modelMapper.map(vo, Seat.class);
 		
 		return entity;

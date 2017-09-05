@@ -16,4 +16,6 @@ public interface ReservationService {
 	public List<ReservationVO> findReservations(DateTime startingTime, DateTime endingTime);
 	public List<ReservationVO> findByUser(long userId, DateTime startingTime, DateTime endingTime);
 	public ReservationVO reserveSeat(NewReservationVO newReservation);
+	public ReservationVO viewReservation(long reservationId);
+	public ReservationVO updateReservation(long reservationId, NewReservationVO vo);
 }

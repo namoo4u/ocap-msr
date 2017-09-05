@@ -6,8 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import ocap.msr.model.SeatVO;
-import ocap.msr.model.UserVO;
+import ocap.msr.model.ReservationCommonVO;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import javax.validation.Valid;
@@ -16,15 +15,9 @@ import javax.validation.constraints.*;
 /**
  * NewReservationVO
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-04T15:39:16.285+09:00")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-04T16:47:01.335+09:00")
 
 public class NewReservationVO   {
-  @JsonProperty("seat")
-  private SeatVO seat = null;
-
-  @JsonProperty("user")
-  private UserVO user = null;
-
   @JsonProperty("reservationDate")
   private LocalDate reservationDate = null;
 
@@ -71,49 +64,11 @@ public class NewReservationVO   {
   @JsonProperty("reservedAt")
   private DateTime reservedAt = null;
 
-  public NewReservationVO seat(SeatVO seat) {
-    this.seat = seat;
-    return this;
-  }
+  @JsonProperty("seatId")
+  private Long seatId = null;
 
-   /**
-   * Get seat
-   * @return seat
-  **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-  @Valid
-
-  public SeatVO getSeat() {
-    return seat;
-  }
-
-  public void setSeat(SeatVO seat) {
-    this.seat = seat;
-  }
-
-  public NewReservationVO user(UserVO user) {
-    this.user = user;
-    return this;
-  }
-
-   /**
-   * Get user
-   * @return user
-  **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-  @Valid
-
-  public UserVO getUser() {
-    return user;
-  }
-
-  public void setUser(UserVO user) {
-    this.user = user;
-  }
+  @JsonProperty("userId")
+  private Long userId = null;
 
   public NewReservationVO reservationDate(LocalDate reservationDate) {
     this.reservationDate = reservationDate;
@@ -190,8 +145,7 @@ public class NewReservationVO   {
    * Get status
    * @return status
   **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @ApiModelProperty(value = "")
 
 
   public StatusEnum getStatus() {
@@ -211,8 +165,7 @@ public class NewReservationVO   {
    * Get reservedAt
    * @return reservedAt
   **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
+  @ApiModelProperty(value = "")
 
   @Valid
 
@@ -222,6 +175,48 @@ public class NewReservationVO   {
 
   public void setReservedAt(DateTime reservedAt) {
     this.reservedAt = reservedAt;
+  }
+
+  public NewReservationVO seatId(Long seatId) {
+    this.seatId = seatId;
+    return this;
+  }
+
+   /**
+   * Get seatId
+   * @return seatId
+  **/
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+
+  public Long getSeatId() {
+    return seatId;
+  }
+
+  public void setSeatId(Long seatId) {
+    this.seatId = seatId;
+  }
+
+  public NewReservationVO userId(Long userId) {
+    this.userId = userId;
+    return this;
+  }
+
+   /**
+   * Get userId
+   * @return userId
+  **/
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+
+  public Long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Long userId) {
+    this.userId = userId;
   }
 
 
@@ -234,18 +229,18 @@ public class NewReservationVO   {
       return false;
     }
     NewReservationVO newReservation = (NewReservationVO) o;
-    return Objects.equals(this.seat, newReservation.seat) &&
-        Objects.equals(this.user, newReservation.user) &&
-        Objects.equals(this.reservationDate, newReservation.reservationDate) &&
+    return Objects.equals(this.reservationDate, newReservation.reservationDate) &&
         Objects.equals(this.startingTime, newReservation.startingTime) &&
         Objects.equals(this.endingTime, newReservation.endingTime) &&
         Objects.equals(this.status, newReservation.status) &&
-        Objects.equals(this.reservedAt, newReservation.reservedAt);
+        Objects.equals(this.reservedAt, newReservation.reservedAt) &&
+        Objects.equals(this.seatId, newReservation.seatId) &&
+        Objects.equals(this.userId, newReservation.userId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(seat, user, reservationDate, startingTime, endingTime, status, reservedAt);
+    return Objects.hash(reservationDate, startingTime, endingTime, status, reservedAt, seatId, userId);
   }
 
   @Override
@@ -253,13 +248,13 @@ public class NewReservationVO   {
     StringBuilder sb = new StringBuilder();
     sb.append("class NewReservationVO {\n");
     
-    sb.append("    seat: ").append(toIndentedString(seat)).append("\n");
-    sb.append("    user: ").append(toIndentedString(user)).append("\n");
     sb.append("    reservationDate: ").append(toIndentedString(reservationDate)).append("\n");
     sb.append("    startingTime: ").append(toIndentedString(startingTime)).append("\n");
     sb.append("    endingTime: ").append(toIndentedString(endingTime)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    reservedAt: ").append(toIndentedString(reservedAt)).append("\n");
+    sb.append("    seatId: ").append(toIndentedString(seatId)).append("\n");
+    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

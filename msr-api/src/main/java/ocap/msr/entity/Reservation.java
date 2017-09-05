@@ -5,11 +5,19 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 public class Reservation {
@@ -35,18 +43,34 @@ public class Reservation {
 	@Column
 	ReservationStatus status;
 	
-	@Column(nullable=false, insertable=false, updatable=false)
+	@CreationTimestamp
+	@Column(nullable=false, insertable=false, updatable=false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+//	@Column
 	@Temporal(TemporalType.TIMESTAMP)
-	java.util.Calendar reservedAt;
+//	@CreatedDate
+	java.util.Date reservedAt;
 	
-	@Column(nullable=false, insertable=false, updatable=false)
+	//@Column(nullable=false, insertable=false, updatable=false)
+	@UpdateTimestamp
+	@Column
 	@Temporal(TemporalType.TIMESTAMP)
-	java.util.Calendar lastModifiedAt;
+//	@LastModifiedDate
+	java.util.Date lastModifiedAt;
 
 	public Reservation() {
 		super();
 	}
+	
+//	@PrePersist
+//	public void prePersist() {
+//		setReservedAt(new java.util.Date());
+//	}
 
+//	@PreUpdate
+//	public void preUpdate() {
+//		setLastModifiedAt(new java.util.Date());
+//	}
+	
 	public long getId() {
 		return id;
 	}
@@ -104,19 +128,19 @@ public class Reservation {
 		this.status = status;
 	}
 
-	public java.util.Calendar getReservedAt() {
+	public java.util.Date getReservedAt() {
 		return reservedAt;
 	}
 
-	public void setReservedAt(java.util.Calendar reservedAt) {
+	public void setReservedAt(java.util.Date reservedAt) {
 		this.reservedAt = reservedAt;
 	}
 
-	public java.util.Calendar getLastModifiedAt() {
+	public java.util.Date getLastModifiedAt() {
 		return lastModifiedAt;
 	}
 
-	public void setLastModifiedAt(java.util.Calendar lastModifiedAt) {
+	public void setLastModifiedAt(java.util.Date lastModifiedAt) {
 		this.lastModifiedAt = lastModifiedAt;
 	}
 

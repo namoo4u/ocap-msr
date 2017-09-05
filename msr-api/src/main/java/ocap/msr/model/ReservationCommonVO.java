@@ -6,20 +6,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import ocap.msr.model.ReservationCommonVO;
-import ocap.msr.model.SeatVO;
-import ocap.msr.model.UserVO;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * ReservationVO
+ * ReservationCommonVO
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-09-04T16:47:01.335+09:00")
 
-public class ReservationVO   {
+public class ReservationCommonVO   {
   @JsonProperty("reservationDate")
   private LocalDate reservationDate = null;
 
@@ -66,16 +63,7 @@ public class ReservationVO   {
   @JsonProperty("reservedAt")
   private DateTime reservedAt = null;
 
-  @JsonProperty("id")
-  private Long id = null;
-
-  @JsonProperty("seat")
-  private SeatVO seat = null;
-
-  @JsonProperty("user")
-  private UserVO user = null;
-
-  public ReservationVO reservationDate(LocalDate reservationDate) {
+  public ReservationCommonVO reservationDate(LocalDate reservationDate) {
     this.reservationDate = reservationDate;
     return this;
   }
@@ -97,7 +85,7 @@ public class ReservationVO   {
     this.reservationDate = reservationDate;
   }
 
-  public ReservationVO startingTime(DateTime startingTime) {
+  public ReservationCommonVO startingTime(DateTime startingTime) {
     this.startingTime = startingTime;
     return this;
   }
@@ -119,7 +107,7 @@ public class ReservationVO   {
     this.startingTime = startingTime;
   }
 
-  public ReservationVO endingTime(DateTime endingTime) {
+  public ReservationCommonVO endingTime(DateTime endingTime) {
     this.endingTime = endingTime;
     return this;
   }
@@ -141,7 +129,7 @@ public class ReservationVO   {
     this.endingTime = endingTime;
   }
 
-  public ReservationVO status(StatusEnum status) {
+  public ReservationCommonVO status(StatusEnum status) {
     this.status = status;
     return this;
   }
@@ -161,7 +149,7 @@ public class ReservationVO   {
     this.status = status;
   }
 
-  public ReservationVO reservedAt(DateTime reservedAt) {
+  public ReservationCommonVO reservedAt(DateTime reservedAt) {
     this.reservedAt = reservedAt;
     return this;
   }
@@ -182,71 +170,6 @@ public class ReservationVO   {
     this.reservedAt = reservedAt;
   }
 
-  public ReservationVO id(Long id) {
-    this.id = id;
-    return this;
-  }
-
-   /**
-   * Get id
-   * @return id
-  **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public ReservationVO seat(SeatVO seat) {
-    this.seat = seat;
-    return this;
-  }
-
-   /**
-   * Get seat
-   * @return seat
-  **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-  @Valid
-
-  public SeatVO getSeat() {
-    return seat;
-  }
-
-  public void setSeat(SeatVO seat) {
-    this.seat = seat;
-  }
-
-  public ReservationVO user(UserVO user) {
-    this.user = user;
-    return this;
-  }
-
-   /**
-   * Get user
-   * @return user
-  **/
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-  @Valid
-
-  public UserVO getUser() {
-    return user;
-  }
-
-  public void setUser(UserVO user) {
-    this.user = user;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -256,35 +179,29 @@ public class ReservationVO   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    ReservationVO reservation = (ReservationVO) o;
-    return Objects.equals(this.reservationDate, reservation.reservationDate) &&
-        Objects.equals(this.startingTime, reservation.startingTime) &&
-        Objects.equals(this.endingTime, reservation.endingTime) &&
-        Objects.equals(this.status, reservation.status) &&
-        Objects.equals(this.reservedAt, reservation.reservedAt) &&
-        Objects.equals(this.id, reservation.id) &&
-        Objects.equals(this.seat, reservation.seat) &&
-        Objects.equals(this.user, reservation.user);
+    ReservationCommonVO reservationCommon = (ReservationCommonVO) o;
+    return Objects.equals(this.reservationDate, reservationCommon.reservationDate) &&
+        Objects.equals(this.startingTime, reservationCommon.startingTime) &&
+        Objects.equals(this.endingTime, reservationCommon.endingTime) &&
+        Objects.equals(this.status, reservationCommon.status) &&
+        Objects.equals(this.reservedAt, reservationCommon.reservedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(reservationDate, startingTime, endingTime, status, reservedAt, id, seat, user);
+    return Objects.hash(reservationDate, startingTime, endingTime, status, reservedAt);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class ReservationVO {\n");
+    sb.append("class ReservationCommonVO {\n");
     
     sb.append("    reservationDate: ").append(toIndentedString(reservationDate)).append("\n");
     sb.append("    startingTime: ").append(toIndentedString(startingTime)).append("\n");
     sb.append("    endingTime: ").append(toIndentedString(endingTime)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    reservedAt: ").append(toIndentedString(reservedAt)).append("\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    seat: ").append(toIndentedString(seat)).append("\n");
-    sb.append("    user: ").append(toIndentedString(user)).append("\n");
     sb.append("}");
     return sb.toString();
   }

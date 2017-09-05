@@ -19,7 +19,8 @@ import ocap.msr.model.SeatVO;
 import ocap.msr.repository.ReservationRepository;
 import ocap.msr.util.MsrConverter;
 
-@Service("reservationService")
+//@Service("reservationService")
+@Service
 public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	private MsrConverter converter;
@@ -105,10 +106,21 @@ public class ReservationServiceImpl implements ReservationService {
 		
 		return converter.toValueObject(reservationRepository.save(entity));
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public ReservationVO viewReservation(long reservationId) {
+		return converter.toValueObject(reservationRepository.findOne(reservationId));
+	}
+
+	@Override
+	public ReservationVO updateReservation(long reservationId, NewReservationVO vo) {
+		Reservation entity = reservationRepository.findOne(reservationId);
+		
+		entity.setStartingTime(new Timestamp(vo.getStartingTime().getMillis()));
+		entity.setEndingTime(new Timestamp(vo.getEndingTime().getMillis()));
+		
+		entity = reservationRepository.save(entity);
+		return converter.toValueObject(entity);
+	}
 
 }
