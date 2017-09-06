@@ -52,10 +52,12 @@ nbdist/
 ## Packaging and Run the spring-boot application
 ```
 $ cd msr-api
+
 $ mvn package
-$ mvn spring-boot:run
 ```
-## Run MSR API application
+
+## Run MSR-API application
+
 ### Run with mysqlcs profile
 ```
 $ cd msr-api
@@ -74,12 +76,24 @@ $ mvn package
 $ cd ..
 
 $ docker image ls
-$ docker image rm $(docker images --format "{{.Repository}}:{{.Tag}}" | grep msr-api)
+$ docker image rm $(docker image ls --format "{{.Repository}}:{{.Tag}}" | grep msr-api)
 
-$ build-docker-image.sh
+$ ./build-docker-image.sh
 
 $ cd docker
 
-$ docker-compose -d up
+$ docker-compose up -d
 
 ```
+
+## MSR-API ENDPOINT deployed on ACCS
+
+BASE_URL: [https://MSRAPI-gse00013250.apaas.us6.oraclecloud.com](https://MSRAPI-gse00013250.apaas.us6.oraclecloud.com)
+
+### cURL test
+```
+curl --include \
+     --header "Content-Type: application/json" \
+     --header "Accept: application/json;charset=UTF-8" \
+  'https://msrapi-gse00013250.apaas.us6.oraclecloud.com/v1/seats?seatNo=&limit='
+``` 
