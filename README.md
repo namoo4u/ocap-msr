@@ -55,5 +55,31 @@ $ cd msr-api
 $ mvn package
 $ mvn spring-boot:run
 ```
+## Run MSR API application
+### Run with mysqlcs profile
+```
+$ cd msr-api
 
+$ mvn spring-boot:run -Drun.profiles=mysqlcs
 
+$ java -jar -Dspring.profiles.active=mysqlcs target/msr-api-1.0.0.jar
+```
+
+### Run with docker profile
+```
+$ cd msr-api
+
+$ mvn package
+
+$ cd ..
+
+$ docker image ls
+$ docker image rm $(docker images --format "{{.Repository}}:{{.Tag}}" | grep msr-api)
+
+$ build-docker-image.sh
+
+$ cd docker
+
+$ docker-compose -d up
+
+```

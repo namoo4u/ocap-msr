@@ -11,7 +11,8 @@ FROM openjdk:8-jdk-alpine
  
 COPY ${PWD}/msr-api/target/msr-api-1.0.0.jar /deployments/
 
-CMD java -jar /deployments/msr-api-1.0.0.jar
+CMD java -jar -Dspring.profiles.active=docker /deployments/msr-api-1.0.0.jar
+
 ```
 
 You can run the command below to dockerize the MSR API application
@@ -29,6 +30,8 @@ version: '2'
 services:
   db:
     image: mysql:5.7.13
+    ports:
+      - "3306:3306"
     volumes:
       - msr_db:/var/lib/mysql
     restart: always
@@ -50,11 +53,9 @@ volumes:
   msr_db:
 ```
 
-There are two docker images 
 
-* MySQL
-* MSR Application
-
+## How to run mysql container without building your own docker image
+This section is just for information.
 
 ```
 $ docker volume ls

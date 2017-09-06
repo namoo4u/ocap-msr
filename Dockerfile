@@ -1,4 +1,3 @@
-
 FROM openjdk:8-jdk-alpine
  
 COPY ${PWD}/msr-api/target/msr-api-1.0.0.jar /deployments/
