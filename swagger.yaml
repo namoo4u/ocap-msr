@@ -11,7 +11,7 @@ info:
   license:
     name: MIT
     url: http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT
-host: MobileSeatReservationAPI-gse00002308.apaas.em2.oraclecloud.com
+host: msrapi-gse00013250.apaas.us6.oraclecloud.com
 basePath: /v1
 schemes:
   - https
