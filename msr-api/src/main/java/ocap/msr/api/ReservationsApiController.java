@@ -44,8 +44,8 @@ public class ReservationsApiController implements ReservationsApi {
         return new ResponseEntity<List<SeatVO>>(reservationService.findAvailableSeats(startingTime, endingTime) ,HttpStatus.OK);
     }
 
-    public ResponseEntity<List<ReservationVO>> findReservations(@ApiParam(value = "starting time you want to reserve a seat") @RequestParam(value = "startingTime", required = false) DateTime startingTime,
-        @ApiParam(value = "ending time you want to reserve a seat") @RequestParam(value = "endingTime", required = false) DateTime endingTime,
+    public ResponseEntity<List<ReservationVO>> findReservations(@ApiParam(value = "starting time you want to reserve a seat") @RequestParam(value = "startingTime", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime startingTime,
+        @ApiParam(value = "ending time you want to reserve a seat") @RequestParam(value = "endingTime", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") DateTime endingTime,
         @ApiParam(value = "available or occupied, upon this value is null, all seats will be returned", allowableValues = "available, occupied") @RequestParam(value = "status", required = false) String status) {
         // do some magic!
         return new ResponseEntity<List<ReservationVO>>(reservationService.findReservations(startingTime, endingTime), HttpStatus.OK);
